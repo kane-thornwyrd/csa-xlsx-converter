@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+'use strict';
+
+const XLSX = require('xlsx');
+const _ = require('lodash');
+const shell = require('shelljs');
+const converter = require('../lib/main');
+const path = require('path');
+
+
+const argv = require('yargs')
+    .usage('Usage: $0 -t [target]')
+    .usage('Usage: $0 -o [outputDir]')
+    .demandOption(['t', 'o'])
+    .argv
+;
+
+const {
+  perPersona, perChannel
+} = converter(argv.t);
+
+const finalFilePrefix = path.basename(argv.t);
+
+if (!shell.test('-d', argv.o)) shell.mkdir('-p', argv.o);
+
+shell.touch(`${argv.o}/${finalFilePrefix}.perPersona.json`);
+shell.touch(`${argv.o}/${finalFilePrefix}.perChannel.json`);
+
+shell.ShellString(JSON.stringify(perPersona, null, 2)).to(`${argv.o}/${finalFilePrefix}.perPersona.json`);
+shell.ShellString(JSON.stringify(perChannel, null, 2)).to(`${argv.o}/${finalFilePrefix}.perChannel.json`);

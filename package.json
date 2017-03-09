@@ -1,0 +1,32 @@
+{
+  "name": "csa-xlsx-converter",
+  "version": "1.0.0",
+  "description": "Convert CSA xlsx reports into json",
+  "main": "lib/main.js",
+  "bin" : { "csa-xlsx-converter" : "./bin/csa-xlsx-converter" },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kane-thornwyrd/csa-xlsx-converter.js.git"
+  },
+  "keywords": [
+    "csa",
+    "france",
+    "politics",
+    "media"
+  ],
+  "author": "Jean-cédric Thérond <jean.cedric.t@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/kane-thornwyrd/csa-xlsx-converter/issues"
+  },
+  "homepage": "https://github.com/kane-thornwyrd/csa-xlsx-converter#readme",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "shelljs": "^0.7.6",
+    "xlsx": "^0.8.7",
+    "yargs": "^7.0.1"
+  }
+}
