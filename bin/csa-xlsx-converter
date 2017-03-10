@@ -21,7 +21,7 @@ const argv = require('yargs')
     .example(
       `$0 -t src/2017-02-01--2017-02-26/originaux/Chaines\ Gen\ -\ Période\ du\ 1er\ au\ 26\ février\ 2017.xlsx -o output
       -p api`,
-      'Output 2 files in the output directory: api.perPersona.json and api.perChannel.json'
+      'Output 2 files in the output directory: candidats-chaines.json and chaines-candidats.json'
     )
     .epilog('GPL-3.0 Jean-cédric Thérond')
     .argv
@@ -32,11 +32,15 @@ const {
 } = converter(argv.t);
 
 const finalFilePrefix = argv.p || path.basename(argv.t);
+const filename = argv.p || path.basename(argv.t);
 
 if (!shell.test('-d', argv.o)) shell.mkdir('-p', argv.o);
 
-shell.touch(`${argv.o}/${finalFilePrefix}.perPersona.json`);
-shell.touch(`${argv.o}/${finalFilePrefix}.perChannel.json`);
+const finalFileNameA = `${argv.o}/${finalFilePrefix}candidats-chaines.json`
+const finalFileNameB = `${argv.o}/${finalFilePrefix}chaines-candidats.json`
 
-shell.ShellString(JSON.stringify(perPersona, null, 2)).to(`${argv.o}/${finalFilePrefix}.perPersona.json`);
-shell.ShellString(JSON.stringify(perChannel, null, 2)).to(`${argv.o}/${finalFilePrefix}.perChannel.json`);
+shell.touch(finalFileNameA);
+shell.touch(finalFileNameB);
+
+shell.ShellString(JSON.stringify(perPersona, null, 2)).to(finalFileNameA);
+shell.ShellString(JSON.stringify(perChannel, null, 2)).to(finalFileNameB);
